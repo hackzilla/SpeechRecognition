@@ -42,14 +42,28 @@ class Recorder: ObservableObject {
     
     func requestPermission()
     {
-        audioSession.requestRecordPermission { (hasPermission) in
-            DispatchQueue.main.async {
-                self.hasMicrophoneAccess = hasPermission
-                
-                if !self.isSpeechRecognizerAvailable {
-                    self.alert = Alert(title: Text("Speech Recognition Unavailable"),
-                                       message: Text("Please try again later."),
-                                       dismissButton: .default(Text("OK")))
+        if #available(iOS 17.0, *) {
+            AVAudioApplication.requestRecordPermission { (hasPermission) in
+                DispatchQueue.main.async {
+                    self.hasMicrophoneAccess = hasPermission
+                    
+                    if !self.isSpeechRecognizerAvailable {
+                        self.alert = Alert(title: Text("Speech Recognition Unavailable"),
+                                           message: Text("Please try again later."),
+                                           dismissButton: .default(Text("OK")))
+                    }
+                }
+            }
+        } else {
+            audioSession.requestRecordPermission { (hasPermission) in
+                DispatchQueue.main.async {
+                    self.hasMicrophoneAccess = hasPermission
+                    
+                    if !self.isSpeechRecognizerAvailable {
+                        self.alert = Alert(title: Text("Speech Recognition Unavailable"),
+                                           message: Text("Please try again later."),
+                                           dismissButton: .default(Text("OK")))
+                    }
                 }
             }
         }
