@@ -27,6 +27,11 @@ To get started with "Speech Recognition by OfDan", clone this repository and ope
 2. Open `SpeechRecognition.xcodeproj` in Xcode.
 3. Build and run the application on your device or simulator.
 
+## Speech Recognition
+
+The supported languages for on-device recognition are the same as the quicktype dictation.
+https://www.apple.com/ios/feature-availability/#quicktype-keyboard-on-device-dictation
+
 ## Contributions
 Contributions to "Speech Recognition by OfDan" are welcome. Please fork the repository and submit a pull request with your changes.
 
